@@ -169,13 +169,14 @@ class MCLCore extends EventEmitter {
   async getModifyJson () {
     let modifyJson = null
 
+    console.log('verjson', this.options.overrides.versionJson)
+
     if (this.options.forge) {
       this.options.forge = path.resolve(this.options.forge)
       this.emit('debug', '[MCLC]: Detected Forge in options, getting dependencies')
       modifyJson = await this.handler.getForgedWrapped()
     } else if (this.options.version.custom) {
       this.emit('debug', '[MCLC]: Detected custom in options, setting custom version file')
-      console.log('verjson', this.options.overrides.versionJson)
       modifyJson = modifyJson || this.options.overrides.versionJson ? JSON.parse(fs.readFileSync(this.options.overrides.versionJson, { encoding: 'utf8' })) : JSON.parse(fs.readFileSync(path.join(this.options.root, 'versions', this.options.version.custom, `${this.options.version.custom}.json`), { encoding: 'utf8' }))
     }
 
