@@ -50,6 +50,8 @@ class MCLCore extends EventEmitter {
       await this.extractPackage()
 
       const directory = this.options.overrides.directory ?? path.join(this.options.root, 'versions', this.options.version.custom ? this.options.version.custom : this.options.version.number)
+      console.log('override', this.options.overrides.directory);
+      console.log('directory', directory);
       this.options.directory = directory
 
       const versionFile = await this.handler.getVersion()
