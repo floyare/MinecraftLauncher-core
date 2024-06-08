@@ -175,7 +175,7 @@ class MCLCore extends EventEmitter {
       modifyJson = await this.handler.getForgedWrapped()
     } else if (this.options.version.custom) {
       this.emit('debug', '[MCLC]: Detected custom in options, setting custom version file')
-      modifyJson = modifyJson || JSON.parse(fs.readFileSync(path.join(this.options.root, 'versions', this.options.version.custom, `${this.options.version.custom}.json`), { encoding: 'utf8' }))
+      modifyJson = modifyJson || this.options.overrides.versionJson ?? JSON.parse(fs.readFileSync(path.join(this.options.root, 'versions', this.options.version.custom, `${this.options.version.custom}.json`), { encoding: 'utf8' }))
     }
 
     return modifyJson
